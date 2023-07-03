@@ -37,13 +37,6 @@ $ simple_test[ifname]
 ```
 
 ## This ROS package
-
-The package contains several modules:
-* ethercat_master -> EtherCAT master server application
-* motion_control -> Set of Python test scripts demonstrating how to control devices and other useful features
-* motorcortex_msgs -> Custom messages for client applications
-* ros_ethercat_igh -> Metha package
-
 ### Building
 At this point you should be all set to start using this ROS package to control your devices. If you haven't yet cloned it, do so into your [catkin configured workspace](http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment). 
 ```sh
