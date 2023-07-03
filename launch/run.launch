@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+ <node pkg="ethercat_master" type="run_position" name="run_position" output="screen" launch-prefix="ethercat_grant" args="enp5s0"/>
+
+</launch>
