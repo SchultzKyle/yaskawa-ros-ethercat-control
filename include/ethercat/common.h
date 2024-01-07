@@ -170,9 +170,6 @@ inline void print_ec_state(uint16 slave_idx)
     case EC_STATE_OPERATIONAL:
       printf("%s: EC_STATE: %s\n", ec_slave[slave_idx].name, "OPERATIONAL");
       break;
-    //case EC_STATE_ACK:
-    //  ROS_INFO("%s: ESM: %s", ec_slave[slave].name, "EC_STATE_ACK");
-    //  break;
     case EC_STATE_PRE_OP + EC_STATE_ERROR:
       printf("%s: EC_STATE: %s + %s\n", ec_slave[slave_idx].name, "PRE_OP", "ERROR");
       break;
@@ -309,24 +306,6 @@ std::string toBinary(int n)
       n /= 2;}
     return r;
 }
-
-// inline void convert_torque_limits(float64 torque_nm[], uint16 torque_limits[], uint32 torque_denominator, bool print_result)
-// {
-//   int n = sizeof(torque_nm)/sizeof(torque_nm[0]);
-//   for (int i = 0; i < n; i++){
-//     float torque_converted = torque_limits_nm[i]*(1/torque_denominator)*100;
-//     if(torque_converted > pow(2, 16)/2){
-//       throw "Torque limit overflow!";
-//     }
-//     torque_limits[i] = static_cast<int16>(torque_converted);
-//   }
-//   if (print_result == true)
-//   {
-//     for (size_t i = 0; i < n; i++) {
-//       std::cout << "Torque limit" << torque_limits[i] << ' ';
-//     }
-//   }
-// }
 
 } } // namespace
 #endif

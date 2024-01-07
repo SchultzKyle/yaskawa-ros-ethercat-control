@@ -1,5 +1,5 @@
-#ifndef ESA_EWDL_ETHERCAT_MASTER_H
-#define ESA_EWDL_ETHERCAT_MASTER_H
+#ifndef MASTER_H_
+#define MASTER_H_
 #include <cstring>
 #include <string>
 #include <vector>
@@ -16,7 +16,7 @@ namespace yaskawa { namespace ethercat {
 inline int slave_setup(uint16 slave_idx)
 {
 
-    /* From Yaskawa manual:
+  /* From Yaskawa manual:
 
   Setting Procedure for PDO Mappings:
 
@@ -48,34 +48,22 @@ inline int slave_setup(uint16 slave_idx)
   wkc += writeSDO<uint8>(slave_idx, 0x1c12, 0x00, disable);
   wkc += writeSDO<uint8>(slave_idx, 0x1c13, 0x00, disable);
 
-  // // Step 2:
-  // uint32 control_word_idx = 0x6040;
-  // uint32 target_position_idx = 0x607a;
-  // uint32 target_torque_idx = 0x6071;
-  // uint32 operation_mode_idx = 0x6060;
+  // Step 2:
+  uint32 control_word_idx = 0x6040;
+  uint32 target_position_idx = 0x607a;
+  uint32 target_torque_idx = 0x6071;
+  uint32 operation_mode_idx = 0x6060;
 
-  // wkc += writeSDO<uint32>(slave_idx, 0x1600, 0x01, control_word_idx);
-  // wkc += writeSDO<uint32>(slave_idx, 0x1600, 0x02, target_position_idx);
-  // wkc += writeSDO<uint32>(slave_idx, 0x1600, 0x03, target_torque_idx);
-  // wkc += writeSDO<uint32>(slave_idx, 0x1600, 0x04, operation_mode_idx);
-
-
-  // uint32 status_word_idx = 0x6041;
-  // uint32 position_actual_value_idx = 0x6064;
-  // uint32 torque_actual_value_idx = 0x6077;
-  // uint32 operation_mode_display_idx = 0x6061;
-
-  // wkc += writeSDO<uint32>(slave_idx, 0x1a00, 0x01, status_word_idx);
-  // wkc += writeSDO<uint32>(slave_idx, 0x1a00, 0x02, position_actual_value_idx);
-  // wkc += writeSDO<uint32>(slave_idx, 0x1a00, 0x03, torque_actual_value_idx);
-  // wkc += writeSDO<uint32>(slave_idx, 0x1a00, 0x04, operation_mode_display_idx);
+  wkc += writeSDO<uint32>(slave_idx, 0x1600, 0x01, control_word_idx);
+  wkc += writeSDO<uint32>(slave_idx, 0x1600, 0x02, target_position_idx);
+  wkc += writeSDO<uint32>(slave_idx, 0x1600, 0x03, target_torque_idx);
+  wkc += writeSDO<uint32>(slave_idx, 0x1600, 0x04, operation_mode_idx);
 
   // Step 3:
   uint8 num_objects_rx = 6;
   uint8 num_objects_tx = 5;
   wkc += writeSDO<uint8>(slave_idx, 0x1600, 0x00, num_objects_rx);
   wkc += writeSDO<uint8>(slave_idx, 0x1a00, 0x00, num_objects_tx);
-
 
   // Step 4:
   uint16 rx_pdo1 = 0x1600;
@@ -224,7 +212,7 @@ public:
    * This updates the target velocities for the motors to follow from
    * kinematics via a ROS message. */
 
-  void commandUpdateCallback(const control::MotorCommands msg)
+  void commandUpdateCallback(const yaskawa_ethercat::MotorCommands msg)
   {
     int8 torque_mode = 10;
     int8 position_mode = 8;
@@ -238,15 +226,7 @@ public:
     int16 torque = msg.torques[i]*100*yaskawa::ethercat::torque_denominator/yaskawa::ethercat::rated_torque[i];
     rx_pdo[slave_idx].target_torque = torque;
     rx_pdo[slave_idx].max_torque = yaskawa::ethercat::torque_limits[i];
-
     rx_pdo[slave_idx].operation_mode = msg.modes[i];
-
-    // if (i==0)
-    // {
-    // printf("Motor: %d PDO Target Position (Counts): %d PDO Target Torque (Unit): %d \n",
-    //       slave_idx,  rx_pdo[slave_idx].target_position, rx_pdo[slave_idx].target_torque);
-    // }
-
 
     }
   }
@@ -443,7 +423,6 @@ public:
     wkc += writeSDO<uint16>(slave_idx, MAX_TORQUE, 0x00, max_torque);
     return wkc;
   }
-
 
 
   int get_error_code(const uint16 slave_idx, uint16 &error_code)

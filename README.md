@@ -1,4 +1,4 @@
-yaskawa-ros-ethercat-control
+yaskawa_ethercat
 ----------------
 
 # Overview

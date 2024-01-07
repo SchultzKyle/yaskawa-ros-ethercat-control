@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>ethercat_master</name>
+  <name>yaskawa_ethercat</name>
   <version>1.0.0</version>
   <description>Package for controlling Yaskawa Sigma 7 servo drives from ROS</description>
 
@@ -9,7 +9,6 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>soem</build_depend>
-  <build_depend>control</build_depend>
   <build_export_depend>soem</build_export_depend>
   <exec_depend>soem</exec_depend>
   <build_depend>message_generation</build_depend>

@@ -1,6 +1,6 @@
 # cmake_minimum_required(VERSION 3.0.2)
 cmake_minimum_required(VERSION 2.8.3)
-project(ethercat_master)
+project(yaskawa_ethercat)
 
 # C++11
 add_compile_options(-std=c++11)
@@ -10,7 +10,6 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   genmsg
-  control
   std_msgs
   message_generation
 )
@@ -18,6 +17,16 @@ find_package(catkin REQUIRED COMPONENTS
 ## Boost
 find_package(Boost REQUIRED COMPONENTS
   program_options
+)
+
+add_message_files(
+  FILES
+  MotorCommands.msg
+  )
+  
+generate_messages(
+  DEPENDENCIES
+  std_msgs
 )
 
 catkin_package(
@@ -31,11 +40,6 @@ include_directories(
   ${Boost_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
 )
-
-add_message_files(
-  FILES
-  MotorCommands.msg
-  )
 
 add_executable(run src/run.cpp)
 
