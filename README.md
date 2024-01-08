@@ -50,7 +50,7 @@ $ catkin build
 Since the program must be run as root to access socket communication, this package does not currently use launch files. There are ways to use a launch file (e.g. [here](https://answers.ros.org/question/165246/launch-node-with-root-permissions/)), but these may pose security risks. You can run the EtherCAT master controller directly with:
 
 ```sh
-$ sudo .devel/lib/ethercat_master/run <ifname>
+$ sudo chrt 90 ./devel/lib/ethercat_master/run <ifname>
 ```
 
 This controller supports the the synchronous drive modes: Position (CSP), Velocity (CSV), and Torque (CST). The default mode is CSP but this can be changed dynamically using modes entry in the message, where CSP = 7, CSV = 8, CST = 9.  

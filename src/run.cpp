@@ -205,10 +205,6 @@ int main(int argc, char* argv[]) {
     int returnValue;
     pthread_join(pthread, (void **)&returnValue);
 
-    if (returnValue != 2056482076) {
-        std::cerr << "Control loop thread terminated with unexpected value" << std::endl;
-    }
-
     // Clean up
     ec_master.close();
     pthread_attr_destroy(&pthread_attr);
