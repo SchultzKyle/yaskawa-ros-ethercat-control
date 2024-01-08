@@ -1,5 +1,5 @@
-#ifndef ESA_EWDL_ETHERCAT_COMMON_H
-#define ESA_EWDL_ETHERCAT_COMMON_H
+#ifndef COMMON_H_
+#define COMMON_H_
 // STL
 #include <string>
 #include <map>

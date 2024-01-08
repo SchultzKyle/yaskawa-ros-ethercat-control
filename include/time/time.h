@@ -1,5 +1,5 @@
-#ifndef ESA_EWDL_ETHERCAT_TIME_H
-#define ESA_EWDL_ETHERCAT_TIME_H
+#ifndef TIME_H_
+#define TIME_H_
 #include <time.h>
 
 #define NSEC_PER_SEC  1000000000
